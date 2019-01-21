@@ -39,8 +39,8 @@ def plot_figure(data, id1, id2):
     plt.figure(figsize=(15,7))
     plt.plot(data.iloc[:,id1], data.iloc[:,id2], label=data.columns[id2])
     plt.grid(True)
-    plt.xlabel(TS_CMP_25Hz.columns[id1]+' (s)')
-    plt.ylabel(TS_CMP_25Hz.columns[id2]+' (m)')
+    plt.xlabel(data.columns[id1]+' (s)')
+    plt.ylabel(data.columns[id2]+' (m)')
     plt.legend()
 
 # ---- main ----------------------------------
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     data = data.reshape(header.shape[1], int(data.shape[0]/header.shape[1]))
 
     # ---- Create a dataframe from the data
-    TS_CMP_25Hz = pd.DataFrame(data=data.T, columns=header.columns)
+    data = pd.DataFrame(data=data.T, columns=header.columns)
 
     # ---- Export 10 first lines in csv file
-    TS_CMP_25Hz.iloc[:10, :].to_csv(args.file_end+'.csv')
+    data.iloc[:10, :].to_csv(args.file_end+'.csv')
